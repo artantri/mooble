@@ -1,0 +1,137 @@
+/*Membuat menjadi satu halaman web*/
+html {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    padding: 10px;
+    background: #55C1A6; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(-45deg, #1F7BBA, #55C1A6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(-45deg, #1F7BBA, #55C1A6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(-45deg, #1F7BBA, #55C1A6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(-45deg, #1F7BBA, #55C1A6);
+    background-repeat: no-repeat;
+}
+
+/*Untuk Wadah Logo Mooble*/
+.image_container{
+    max-width: 300px;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin: auto;
+}
+
+/*Untuk Logo Mooble*/
+.image_container img{
+    max-width: 70%;
+    max-height: 70%;
+    display: block;
+    margin: auto;
+}
+
+/*Untuk Kotak Form Login dan Register*/
+.form-signin {
+    max-width: 330px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: auto;
+    background: white;
+}
+
+/*Untuk Judul Form*/
+.form-signin-heading {
+    color: #5DC2A9;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18pt;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 1;
+}
+
+/*Untuk Captcha*/
+.g-recaptcha {
+    margin-bottom: 10px;
+}
+
+/*Untuk Link ke Log atau Register*/
+.changeLogReg{
+    text-align: center;
+    font-family:'Open Sans', sans-serif; 
+    margin-top:10px; 
+}
+
+/*Untuk tombol Masuk atau Daftar*/
+button.btn.btn-lg.btn-primary.btn-block{
+    background-color: #5DC2A9; 
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14pt;
+    border-radius: 0px;
+}
+button.btn.btn-lg.btn-primary.btn-block:hover{
+    background-color: lightseagreen; 
+}
+
+/*Untuk Input Type text*/
+.form-signin input[type="text"] {
+    margin-bottom: 5px;
+    background-color: #ECEFF1;
+    border: 1px solid #B0BEC5;
+    border-radius: 0px;
+}
+
+/*Untuk Input Type tel*/
+.form-signin input[type="tel"] {
+    margin-bottom: 5px;
+    background-color: #ECEFF1;
+    border: 1px solid #B0BEC5;
+    border-radius: 0px;   
+}
+
+/*Untuk Input Type password*/
+.form-signin input[type="password"] {
+    background-color: #ECEFF1;
+    border: 1px solid #B0BEC5;
+    margin-bottom: 10px;
+    border-radius: 0px;
+}
+
+/*Untuk Input Type text ketika diklik*/
+.form-signin input[type="text"]:focus {
+    border: 1px solid #5DC2A9;
+}
+
+/*Untuk Input Type password ketika diklik*/
+.form-signin input[type="password"]:focus {
+    border: 1px solid #5DC2A9;
+}
+
+/*Untuk Input Type tel ketika diklik*/
+.form-signin input[type="tel"]:focus {
+    border: 1px solid #5DC2A9;
+}
+

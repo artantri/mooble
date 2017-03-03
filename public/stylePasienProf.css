@@ -1,0 +1,389 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    background-color: #E0E0E0;
+}
+
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    overflow: hidden;
+    background-color: white;
+    /*                position: fixed;*/
+    top: 0;
+    width: 100%;
+}
+
+
+.menu{
+    height: 50px;
+    /*
+    text-align: center;
+    margin: auto;
+    */
+}
+.menubtn {
+    float: left;
+    height: 30px;
+    padding: 15px 20px;
+}
+
+.healthReport {
+    width: 95%;
+    background-color: white;
+    height: auto;
+    margin: auto;
+    border-top: 5px solid;
+    border-top-color: #00796B;
+    display: flex;               /* align vertical */
+    align-items: center; 
+    margin-bottom: 30px;
+}
+
+.chartHealthInfo{
+    width: 98%;
+    height: auto;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    /*        background-color: aqua;*/
+}
+
+.chartViewChooser{
+    width: auto;
+    padding-left: 20px;
+    /*    background-color: blueviolet;*/
+    padding-bottom: 10px;
+    border-bottom: 2px solid;
+    border-bottom-color: #C1C1C0;
+
+}
+.chartViewChooser label{
+    font-size: 15px;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.chart{
+    /*    background-color: aquamarine;*/
+    width: 100%;
+    margin: auto;
+}
+
+.chartViewChooser select {
+    background-color: #E1F2F1;
+    border: 1px solid #00796B;
+    font-size: 13px;
+    color: #00796B;
+    height: 30px;
+    width: 268px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.buttonNav {
+    width: 100%;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.buttonNav button{
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    color: white;
+}
+
+.buttonNav button:focus {
+    outline: none;
+}
+
+.groupHealthReport{
+    margin-top: 20px;
+}
+
+.btnAnggotaTubuh{
+    width: auto;
+    text-align: center;
+}
+
+.btnAnggotaTubuh button{
+    border: none;
+    width: auto;
+    font-size: 11px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 3px;
+    background-color: #5DC2A9;
+}
+
+.btnAnggotaTubuh button:hover{
+    background-color: #00796B;
+}
+
+.btnAnggotaTubuh button:focus {
+    outline: none;
+    background-color: #00796B;
+}
+
+
+
+
+.pasienProfile {
+    width: 95%;
+    background-color: white;
+    height: 400px;
+    margin: 30px auto;
+
+    display: flex;               /* align vertical */
+    align-items: center; 
+}
+
+.pasienFotoID{
+    display: inline-block;
+    height: auto;
+    padding-right: 30px;
+    border-right: 3px solid;
+    border-right-color: #80CBC4;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 40px;
+    /*            background-color: aqua;*/
+
+}
+
+/*
+#fotodanAddDiagnose img {
+vertical-align: middle;
+}
+
+#fotodanAddDiagnose button {
+vertical-align: middle;       
+}
+*/
+.foto{
+    text-align:center;
+}
+
+.imageButton{
+    padding-top: 10px;
+    text-align:center;
+}
+
+.label-ID{
+    padding-top: 5px;
+    text-align:center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20pt;
+    color: #80CBC4;
+}
+
+.healthInfo{
+    /*
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    */
+    /*                        background-color: aqua;*/
+    height: auto;
+    /*            width: 250px;*/
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+
+    width: 500px;
+}
+
+.healthInfoTop{
+    border-bottom: 2px solid;
+    border-bottom-color: #C1C1C0;
+    /*            background-color: violet;*/
+    padding-left: 20px;
+    padding-bottom: 10px;
+
+}
+
+.healthInfoBottom{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.health{
+    height: 30px;
+    display: flex;               /* align vertical */
+    align-items: center; 
+
+
+}
+
+.labelhealthInfo{
+    padding-right: 20px;
+    color: #80CBC4;
+}
+
+.personalInfo{
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*            background-color: aqua;*/
+    height: auto;
+    width: 250px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    border-right: 2px solid;
+    border-right-color: #C1C1C0;
+}
+
+.labelpersonalInfo{
+    margin: 1px;
+    color: #80CBC4;
+}
+
+.Info{
+    padding-left: 20px;
+    color: #9D9D9D;
+    word-wrap: break-word;      /* IE 5.5-7 */
+    white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+    white-space: pre-wrap;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #424242;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+
+
+/*
+.sidenav a {
+padding: 8px 8px 8px 32px;
+text-decoration: none;
+font-size: 25px;
+color: #818181;
+display: block;
+transition: 0.3s
+}
+*/
+
+.sidenav .closebtn{
+    float: right;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 30px;
+}
+
+.sidenav .pilihanMenu{
+    height: 50px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    text-align: center;
+
+}
+
+.sidenav  .pilihanMenu img{
+    height: 30px;
+}
+
+.sidenav  .pilihanMenu a{
+    text-decoration: none;
+    padding-top: 10px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+.pilihanMenu:hover {
+	background-color: #212121;
+}
+
+.pilihanMenu:hover a {
+    color: #00796B;
+}
+
+.closebtn:hover {
+	color: white;
+}
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.diagnoseButton {
+    display: inline-block;
+    background-color: #5DC2A9;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.diagnoseButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.diagnoseButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.diagnoseButton:hover span {
+    padding-right: 25px;
+}
+
+.diagnoseButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.profImage-round {
+    border-radius: 50%;
+    width:170px;
+    height:170px; 
+    background: #55C1A6; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(-135deg, #1F7BBA, #55C1A6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(-135deg, #1F7BBA, #55C1A6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(-135deg, #1F7BBA, #55C1A6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(-135deg, #1F7BBA, #55C1A6);
+    background-repeat: no-repeat;
+    padding: 10px;
+}
