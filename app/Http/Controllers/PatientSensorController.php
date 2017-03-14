@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 use App\Patient;
 
+use App\Traits\AlertCheckTrait;
 
 class PatientSensorController extends Controller
 {
+    use AlertCheckTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -37,9 +40,20 @@ class PatientSensorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $patient_id)
     {
         //
+        $sdata = new SensorData;
+        $sdata->patient_id = $patient_id;
+        $sdata->temperature = $request->input('temperature');
+        $sdata->systolic_pressure = $request->input('systolic_pressure');
+        $sdata->diastolic_pressure = $request->input('diastolic_pressure');
+        $sdata->save();
+
+        //check for abnormal data pake fungsi dari trait
+        $this->checkSensorData($sdata);
+        
+        return response($sdata, 201);
     }
 
     /**

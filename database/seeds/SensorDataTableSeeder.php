@@ -15,14 +15,19 @@ class SensorDataTableSeeder extends Seeder
     {
         //
         //$temp = $this->randomTemp();
-        DB::table('sensor_data')->insert([
-        	'patient_id' => '1',
+        for ($i = 1; $i <= 5; $i++){
+            DB::table('sensor_data')->insert([
+            'patient_id' => '1',
             'temperature' => $this->randomTemp(),
             'systolic_pressure' => mt_rand(90,250),
             'diastolic_pressure' => mt_rand(60,90),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+            sleep(10);
+        }
+
+        
     }
 
     protected function randomTemp($min = 36, $max = 45) {
