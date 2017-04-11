@@ -31,6 +31,9 @@ Route::resource('patient.report', 'PatientReportController');
 Route::resource('patient.diagnosis', 'PatientDiagnosisController');
 Route::resource('patient.sensor', 'PatientSensorController');
 
+Route::get('', 'Api\SensorController@store');
+
+
 Route::get('staff/filter', 'StaffController@filter');
 Route::resource('staff', 'StaffController');
 

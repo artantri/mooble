@@ -16,9 +16,8 @@ class CreateSensorDataTable extends Migration
         Schema::create('sensor_data', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('patient_id')->unsigned();
-            $table->integer('temperature');
-            $table->integer('systolic_pressure');
-            $table->integer('diastolic_pressure');
+            $table->double('temperature', 5, 2);
+            $table->double('heart_rate', 5, 2);
             $table->timestamps();
             
             $table->foreign('patient_id')
@@ -34,7 +33,10 @@ class CreateSensorDataTable extends Migration
      */
     public function down()
     {
-        $table->dropForeign('sensor_data_patient_id_foreign');
+        Schema::table('sensor_data', function (Blueprint $table) {
+            $table->dropForeign('sensor_data_patient_id_foreign');
+        
+        });
         
         Schema::dropIfExists('sensor_data');
     }

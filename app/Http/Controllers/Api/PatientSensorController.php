@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\SensorData;
 use Illuminate\Http\Request;
@@ -24,10 +24,12 @@ class PatientSensorController extends Controller
         //return Patient::findOrFail($patient_id)->sensor_data->all();
 
         $ps = Patient::findOrFail($patient_id)->sensor_data->all();
-        return response()->json([
+        $returnData = array(
             'status' => 'success',
-            'data' => $ps
-        ]);        
+            'sensor_data' => $ps
+        );
+        return Response::json($returnData, 200);
+
     }
 
     /**
