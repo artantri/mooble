@@ -31,24 +31,24 @@ class StaffController extends Controller
     */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email|max:255|unique:staffs',
-            'username' => 'required|max:255|unique:staffs',
-            'password' => 'required|min:6',
-            'name' => 'required',
-            'contact' => 'required',
+        // $this->validate($request, [
+        //     'email' => 'required|email|max:255|unique:staffs',
+        //     'username' => 'required|max:255|unique:staffs',
+        //     'password' => 'required|min:6',
+        //     'name' => 'required',
+        //     'contact' => 'required',
             
-        ]);
+        // ]);
         
-        $staff = new Staff;
-        $staff->email = $request->input('email');
-        $staff->username = $request->input('username');
-        $staff->password = bcrypt($request->input('password'));
-        $staff->name = $request->input('name');
-        $staff->contact = $request->input('contact');
-        $staff->save();
+        // $staff = new Staff;
+        // $staff->email = $request->input('email');
+        // $staff->username = $request->input('username');
+        // $staff->password = bcrypt($request->input('password'));
+        // $staff->name = $request->input('name');
+        // $staff->contact = $request->input('contact');
+        // $staff->save();
         
-        return response($staff, 201);
+        // return response($staff, 201);
     }
 
     /**
@@ -121,11 +121,32 @@ class StaffController extends Controller
         $found = Staff::where([
             ['name','like',
             '%'.$request->get('name').'%'],
+            ['is_approved','like',
+            '%'.$request->get('approved').'%'],
             // ['address','like',
             // '%'.$request->get('address').'%']
             ])->get();
         
         
         return $found;
+    }
+
+    //change approval status
+    public function approve($id)
+    {
+        $staff = Staff::findOrFail($id);
+        $staff->is_approved = '1';
+        $staff->save();
+        
+        return response($staff, 200);
+    }
+
+    public function disapprove($id)
+    {
+        $staff = Staff::findOrFail($id);
+        $staff->is_approved = '0';
+        $staff->save();
+        
+        return response($staff, 200);
     }
 }

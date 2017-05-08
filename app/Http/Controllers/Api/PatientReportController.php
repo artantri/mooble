@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+
 //models used
 use App\Patient;
 use App\HealthReport;

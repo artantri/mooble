@@ -50,5 +50,25 @@
             </form>
         </div>
 
+        <!--        Form input staff-->
+        <!-- <div class="container">
+            <form class="form-signin" method="POST" action="{{ url('/stafflogin') }}">
+                <h2 class="form-signin-heading">LOG IN</h2>
+
+                {{ csrf_field() }}
+
+                <label for="InputUsername" class="sr-only">Username</label>
+                <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required> 
+
+                <label for="inputPassword" class="sr-only">Kata Kunci</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                <div class="g-recaptcha" data-sitekey="6Lcp4xEUAAAAADmadJTjAa2StrT85u8t2t1cX6EH"></div>
+                
+                <button class="btn btn-lg btn-primary btn-block" type="submit">MASUK</button>
+                <p class ="changeLogReg">Belum Memiliki Akun? <a href="/register">Register Disini</a></p>
+            </form>
+        </div> -->
+
     </body>
 </html>

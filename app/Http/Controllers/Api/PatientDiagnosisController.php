@@ -4,21 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+
 //models used
 use App\Patient;
 use App\Diagnosis;
 
 class PatientDiagnosisController extends Controller
 {
-    //
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //daftar semua diagnosis 1 pasien
     public function index($patient_id)
     {
-        //
         return Patient::findOrFail($patient_id)->diagnoses->all();
     }
 

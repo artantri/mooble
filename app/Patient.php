@@ -43,4 +43,9 @@ class Patient extends Model
     {
         return $this->hasMany('App\SensorData');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking');
+    }
 }

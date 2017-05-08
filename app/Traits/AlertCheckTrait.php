@@ -12,7 +12,8 @@ trait AlertCheckTrait
     protected function checkSensorData(SensorData $sdata)
     {
         if ($sdata->temperature > "38") {
-            $msg = "high temperature ({$sdata->temperature} °C)";
+            //$msg = "high temperature ({$sdata->temperature} °C)";
+            $msg = "high temperature ({$sdata->temperature})";
             $this->makeAlert($sdata,$msg);
         }
 
@@ -33,7 +34,7 @@ trait AlertCheckTrait
         $alert = new Alert;
         //$alert->patient_id = $sdata->patient_id;
         $alert->sensor_data_id = $sdata->id;
-        //$alert->doctor_id = "1"; //ini harusnya dari mana ya?
+        //$alert->doctor_id = "1"; //dokter yg dikirimi alrt
         $alert->message = $msg;
         $alert->save();
     }

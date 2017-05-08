@@ -59,12 +59,12 @@ class LoginController extends Controller
         $request['captcha'] = $this->captchaCheck();
         $this->validate($request, [
             $this->username() => 'required', 'password' => 'required',
-            'g-recaptcha-response' => 'required',
-            'captcha'               => 'required|min:1'
+            // 'g-recaptcha-response' => 'required',
+            // 'captcha'               => 'required|min:1'
         ],
         [
-            'g-recaptcha-response.required' => 'Captcha belum diisi',
-            'captcha.min'           => 'Wrong captcha, please try again.'
+            // 'g-recaptcha-response.required' => 'Captcha belum diisi',
+            // 'captcha.min'           => 'Wrong captcha, please try again.'
 
         ]);
     }

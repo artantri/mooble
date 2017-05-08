@@ -29,12 +29,14 @@ Route::resource('report', 'HealthReportController');
 
 Route::resource('patient.report', 'PatientReportController');
 Route::resource('patient.diagnosis', 'PatientDiagnosisController');
-Route::resource('patient.sensor', 'PatientSensorController');
+
+Route::resource('patient.sensor', 'Api\PatientSensorController');
 
 Route::get('', 'Api\SensorController@store');
 
+Route::get('alert', 'AlertController@index');
 
 Route::get('staff/filter', 'StaffController@filter');
 Route::resource('staff', 'StaffController');
 
-	
+Route::resource('patient.booking', 'BookingController');
