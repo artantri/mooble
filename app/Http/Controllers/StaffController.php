@@ -14,7 +14,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        return Staff::all();
+        //return Staff::all();
+        return view('staff_search');
     }
     
     /**

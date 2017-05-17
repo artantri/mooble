@@ -37,7 +37,7 @@
 
                 {{ csrf_field() }}
 
-                <label for="InputUsername" class="sr-only">Username</label>
+                <!-- <label for="InputUsername" class="sr-only">Username</label>
                 <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required> 
 
                 <label for="inputPassword" class="sr-only">Kata Kunci</label>
@@ -46,7 +46,18 @@
                 <div class="g-recaptcha" data-sitekey="6Lcp4xEUAAAAADmadJTjAa2StrT85u8t2t1cX6EH"></div>
                 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">MASUK</button>
-                <p class ="changeLogReg">Belum Memiliki Akun? <a href="/register">Register Disini</a></p>
+                <p class ="changeLogReg">Belum Memiliki Akun? <a href="/register">Register Disini</a></p> -->
+
+                <label for="InputUsername" class="sr-only">Username</label>
+                <input type="text" name="username" id="inputUsername" class="form-control font-roboto" placeholder="Username" required> 
+
+                <label for="inputPassword" class="sr-only">Kata Kunci</label>
+                <input type="password" name="password" id="inputPassword" class="form-control font-roboto" placeholder="Password" style="margin-top:10px;" required>
+
+                <div class="g-recaptcha" data-sitekey="6Lcp4xEUAAAAADmadJTjAa2StrT85u8t2t1cX6EH"></div>
+
+                <button class="btn btn-lg btn-primary btn-block font-roboto" style="margin-top:30px;" type="submit">MASUK</button>
+                <h6><p class ="changeLogReg font-roboto-condensed">Belum Memiliki Akun? <a href="register.php">Register Disini</a></p></h6>
             </form>
         </div>
 

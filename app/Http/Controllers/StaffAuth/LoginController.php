@@ -38,7 +38,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('staff.auth.login');
+        //return view('staff.auth.login');
+        return view('login_staff');
     }
 
     //override guard for staff
@@ -118,14 +119,14 @@ class LoginController extends Controller
         }
 
         //cek user sm pass bener gak
-        if($this->checkCredentials($request)){
+        //if($this->checkCredentials($request)){
             //cek approved gak
             if ($this->attemptLogin($request)) {
                 return $this->sendLoginResponse($request);
             }else{
                 return $this->sendNotApprovedResponse($request);
             }
-        }
+        //}
 
         
 
@@ -141,7 +142,7 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt([
-            $this->credentials($request),/*'is_approved'=>'1'*/], $request->has('remember')
+            $this->credentials($request)/*,'is_approved'=>'1'*/], $request->has('remember')
         );
     }
 

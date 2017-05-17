@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+// Route::get('/', function () {
+//     return view('login_dokter');
+// });
 
 Auth::routes();
 
@@ -29,6 +29,10 @@ Route::resource('patient.sensor', 'PatientSensorController');
 //untuk semua route yang perlu auth (harus login)
 Route::group(['middleware' => 'auth'], function () {
 
+	Route::get('/', function () {
+    	return view('pasien_search');
+	});
+
 	Route::get('diagnosis/filter', 'DiagnosisController@filter');
 	Route::resource('diagnosis', 'DiagnosisController');
 		
@@ -38,10 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('report/filter', 'HealthReportController@filter');
 	Route::resource('report', 'HealthReportController');
 	
+	Route::get('staff', 'StaffController@index');
 	Route::get('staff/filter', 'StaffController@filter');
 	Route::get('staff/{id}/approve', 'StaffController@approve');
 	Route::get('staff/{id}/disapprove', 'StaffController@disapprove');
-	Route::resource('staff', 'StaffController');
+	//Route::resource('staff', 'StaffController');
 
 	Route::get('profile', 'ProfileController@show');
 	Route::get('profile/edit', 'ProfileController@edit');

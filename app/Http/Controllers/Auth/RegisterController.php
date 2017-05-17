@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('register');
+        return view('register_dokter');
     }
 
     /**
@@ -70,19 +70,19 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:doctors',
             'username' => 'required|max:255|unique:doctors',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
 
-            'g-recaptcha-response' => 'required',
-            'captcha'               => 'required|min:1'
+            // 'g-recaptcha-response' => 'required',
+            // 'captcha'               => 'required|min:1'
         ],
         [
             'email.unique' => 'Email ini telah digunakan.',
             'email.email' => 'Email tidak valid.',
             'username.unique' => 'Username ini telah digunakan.',
             'password.min' => 'Password harus lebih dari 6 karakter.',
-            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
-            'g-recaptcha-response.required' => 'Captcha belum diisi',
-            'captcha.min'           => 'Wrong captcha, please try again.'
+            // 'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            // 'g-recaptcha-response.required' => 'Captcha belum diisi',
+            // 'captcha.min'           => 'Wrong captcha, please try again.'
 
         ]);
     }
