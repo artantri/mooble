@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+//buat method regsiter
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+
 //use captchatrait
 use App\Traits\CaptchaTrait;
 
@@ -38,6 +42,19 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         return view('register_dokter');
+    }
+
+    //override biar gak langsung login habis regis
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //$this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath())->with('success', 'success');
     }
 
     /**

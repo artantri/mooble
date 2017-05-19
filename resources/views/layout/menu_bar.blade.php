@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+@yield('PHP')
 <html lang="en">
     <head>
+        @yield('headAdd')
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Meta, title, CSS, favicons, etc. -->
         <meta charset="utf-8">
@@ -42,9 +44,9 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-user-md"></i> Profil Saya <span class="fa fa-chevron-down"></span></a>
                                     </li>
-                                    <li><a href="pasienSearch.php"><i class="fa fa-wheelchair"></i> Pasien <span class="fa fa-chevron-down"></span></a>
+                                    <li><a href="{{ url('/')}}"><i class="fa fa-wheelchair"></i> Pasien <span class="fa fa-chevron-down"></span></a>
                                     </li>
-                                    <li><a href="staff.php"><i class="fa fa-hospital-o"></i> Staff <span class="fa fa-chevron-down"></span></a>
+                                    <li><a href="{{ url('/staff')}}"><i class="fa fa-hospital-o"></i> Staff <span class="fa fa-chevron-down"></span></a>
                                     </li>
                                 </ul>
                             </div>

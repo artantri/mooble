@@ -26,12 +26,14 @@
                 PNotify.prototype.options.styling = "bootstrap3";
                 var stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
                 
-                @if ($errors->has('username'))
-                    show_stack_bar_bottom('passError');       
+                @if (session()->has('success'))
+                    show_stack_bar_bottom('success');         
                 @endif
 
                 @if ($errors->has('g-recaptcha-response'))
-                    show_stack_bar_bottom('captchaError');      
+                    show_stack_bar_bottom('captchaError');     
+                @elseif ($errors->has('username'))
+                    show_stack_bar_bottom('passError');     
                 @endif
                 
                 
@@ -58,6 +60,11 @@
                             opts.title = "Oops";
                             opts.text = "Password yang anda masukkan salah";
                             opts.type = "error";
+                            break;
+                        case 'success':
+                            opts.title = "Registrasi Berhasil";
+                            opts.text = "Anda sudah terdaftar sebagai dokter pada MOOBLE";
+                            opts.type = "success";
                             break;
                         
                     }

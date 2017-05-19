@@ -31,7 +31,7 @@
 
                                     <div class="x_content">
 
-                                        <form class="form-signin" method="POST">
+                                        <form class="form-signin" method="GET">
 
                                             <div class="search_bottom" style="margin-bottom:20px;">
                                                 <div class="form-group has-feedback">
@@ -50,8 +50,8 @@
                                                 <div>
                                                     <label>Status Staff</label><br>
                                                     <div class="radioChooser">
-                                                        <input type="radio" name="status" value="aktif"> Sudah Registrasi<br>
-                                                        <input type="radio" name="status" value="belum aktif"> Belum Registrasi<br> 
+                                                        <input type="radio" name="status" value="1"> Sudah Registrasi<br>
+                                                        <input type="radio" name="status" value="0"> Belum Registrasi<br> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,57 +152,55 @@
                                                 // }
 
 
-                                                // $data="";
-                                                // if($result){
-                                                //     $count_row = 1;
+                                                $data="";
+                                                if($result){
+                                                    $count_row = 1;
 
-                                                //     // Fetch one and one row
-                                                //     while ($row= $result->fetch_row()){
+                                                    // Fetch one and one row
+                                                    //while ($row= $result->fetch_row()){
+                                                    foreach ($result as $row){
 
-                                                //         if($row[4] == 0){
-                                                //             $statusStaff = "<a type='button' class='btn btn-round btn-danger btn-xs' style='width:120px; color:white;'>Belum Registrasi</a>";
-                                                //             $statusButton ="<i class='glyphicon glyphicon-ok-sign'></i> Daftarkan";
+                                                        if($row->is_approved == 0){
+                                                            $statusStaff = "<a type='button' class='btn btn-round btn-danger btn-xs' style='width:120px; color:white;'>Belum Registrasi</a>";
+                                                            $statusButton ="<i class='glyphicon glyphicon-ok-sign'></i> Daftarkan";
 
-                                                //         }
-                                                //         elseif($row[4] == 1){
-                                                //             $statusStaff = "<a type='button' class='btn btn-round btn-success btn-xs' style='width:120px; color:white;'>Sudah Registrasi</a>";
-                                                //             $statusButton ="<i class='glyphicon glyphicon-remove-sign'></i> Batalkan";
-                                                //         }
-                                                //         $data .= "<tr id='row_".$count_row."'>
-                                                //         <td id='staffID'>" .$row[0]. "</td>
-                                                //         <td id='staffName'>" .$row[1]. "</td>
-                                                //         <td>" .$row[3]. "</td>
-                                                //         <td id='staffStatus'>" .$statusStaff. "</td>
-                                                //         <td>
-                                                //             <a data-row='row_".$count_row."' class='btn btn-app deleteStaff'>
-                                                //                 <i class='fa fa-trash'></i> Hapus
-                                                //             </a>
-                                                //             <a data-row='row_".$count_row."' class='btn btn-app statusStaff'>
-                                                //                 ".$statusButton."
-                                                //             </a>
+                                                        }
+                                                        elseif($row->is_approved == 1){
+                                                            $statusStaff = "<a type='button' class='btn btn-round btn-success btn-xs' style='width:120px; color:white;'>Sudah Registrasi</a>";
+                                                            $statusButton ="<i class='glyphicon glyphicon-remove-sign'></i> Batalkan";
+                                                        }
+                                                        $data .= "<tr id='row_".$count_row."'>
+                                                        <td id='staffID'>" .$row->id. "</td>
+                                                        <td id='staffName'>" .$row->name. "</td>
+                                                        <td>" .$row->contact. "</td>
+                                                        <td id='staffStatus'>" .$statusStaff. "</td>
+                                                        <td>
+                                                            <a data-row='row_".$count_row."' class='btn btn-app deleteStaff'>
+                                                                <i class='fa fa-trash'></i> Hapus
+                                                            </a>
+                                                            <a data-row='row_".$count_row."' class='btn btn-app statusStaff'>
+                                                                ".$statusButton."
+                                                            </a>
 
-                                                //         </td>
-                                                //         </tr>";
-                                                //         $count_row ++;
+                                                        </td>
+                                                        </tr>";
+                                                        $count_row ++;
 
-                                                //     }
-                                                //     echo $data;
-                                                // }
+                                                    }
+                                                    echo $data;
+                                                }
 
                                                 ?>
 
-                                               
-
-
                                                 <script text="text/javascript">
                                                     $(document).ready(function(){
-                                                        $('.deleteStaff').click( function(){
+                                                        $('.statusStaff').click( function(){
                                                             var rowID = $(this).attr('data-row');
                                                             var Staff_id=$(this).closest('#' + rowID).find('#staffID').text();
                                                             $.ajax({
-                                                                type: "POST",
-                                                                url: "{{ url('/conncect/deleteStaff.php') }}",
-                                                                data: {ID: Staff_id, con: "delete"},
+                                                                type: "GET",
+                                                                url: "{{ url('/staff/approve') }}",
+                                                                data: {id: Staff_id},
 
                                                             });
 
@@ -210,15 +208,14 @@
                                                                 window.location.reload();
                                                             });
                                                         });
-//                                                        
-                                                        $('.statusStaff').click( function(){
+
+                                                        $('.deleteStaff').click( function(){
                                                             var rowID = $(this).attr('data-row');
                                                             var Staff_id=$(this).closest('#' + rowID).find('#staffID').text();
-                                                            var Staff_status=$(this).closest('#' + rowID).find('#staffStatus').text();
                                                             $.ajax({
-                                                                type: "POST",
-                                                                url: "{{ url('/conncect/deleteStaff.php') }}",
-                                                                data: {ID: Staff_id, con: "edit", Status: Staff_status },
+                                                                type: 'DELETE',
+                                                                url: "{{ url('/staff/delete') }}",
+                                                                data: {id: Staff_id, "_method":'DELETE', "_token":"{{ csrf_token() }}"},
 
                                                             });
 
@@ -227,6 +224,61 @@
                                                             });
                                                         });
                                                     });
+
+
+
+                                                </script>
+
+                                               
+
+
+                                                <script text="text/javascript">
+//                                                     $(document).ready(function(){
+//                                                         $('.deleteStaff').click( function(){
+//                                                             var rowID = $(this).attr('data-row');
+//                                                             var Staff_id=$(this).closest('#' + rowID).find('#staffID').text();
+//                                                             $.ajax({
+//                                                                 type: "POST",
+//                                                                 url: "{{ url('/home') }}",
+//                                                                 data: {ID: Staff_id, con: "delete"},
+
+//                                                             });
+
+//                                                             $(document).ajaxStop(function(){
+//                                                                 window.location.reload();
+//                                                             });
+//                                                         });
+// //                                                        
+//                                                         $('.statusStaff').click( function(){
+//                                                             var rowID = $(this).attr('data-row');
+//                                                             var Staff_id=$(this).closest('#' + rowID).find('#staffID').text();
+//                                                             var Staff_status=$(this).closest('#' + rowID).find('#staffStatus').text();
+
+//                                                             if(Staff_status=='Sudah Registrasi'){
+//                                                                 $.ajax({
+//                                                                 type: "POST",
+//                                                                 // url: "{{ url('/conncect/deleteStaff.php') }}",
+//                                                                 url: "google.com",
+//                                                                 // url: "{{ url('/staff') }}"+/+Staff_id+"approve",
+//                                                                 data: {ID: Staff_id, con: "edit", Status: Staff_status },
+
+//                                                             });
+//                                                             }else{
+//                                                                 $.ajax({
+//                                                                 type: "POST",
+//                                                                 // url: "{{ url('/conncect/deleteStaff.php') }}",
+//                                                                 url: "{{ url('/staff') }}"+/+Staff_id+"disapprove",
+//                                                                 data: {ID: Staff_id, con: "edit", Status: Staff_status },
+
+//                                                             });
+//                                                             }
+                                                            
+
+//                                                             $(document).ajaxStop(function(){
+//                                                                 window.location.reload();
+//                                                             });
+//                                                         });
+//                                                     });
 
 
 

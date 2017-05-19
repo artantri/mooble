@@ -12,10 +12,23 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //return Staff::all();
-        return view('staff_search');
+        //return view('staff_search')->with('result', Staff::all());   
+        $found = Staff::where([
+                ['name','like',
+                '%'.$request->get('nama').'%'],
+                ['contact','like',
+                '%'.$request->get('telepon').'%'],
+                ['id','like',
+                '%'.$request->get('idStaff').'%'],
+                ['is_approved','like',
+                '%'.$request->get('status').'%'],
+                
+                ])->get();
+            
+        return view('staff_search')->with('result', $found);  
     }
     
     /**
@@ -104,9 +117,9 @@ class StaffController extends Controller
     * @param  int  $id
     * @return Response
     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $staff = Staff::find($id);
+        $staff = Staff::find($request->get('id'));
         $staff->delete();
 
         return response('Deleted.', 200);
@@ -115,39 +128,48 @@ class StaffController extends Controller
     //filter pake param get di url
     public function filter(Request $request)
     {
-        // $found = Diagnosis::where('diagnose_result','like',
-            // '%'.$request->get('diagnose_result').'%')
-            // ->get();
-        
+        //return view('home');
         $found = Staff::where([
-            ['name','like',
-            '%'.$request->get('name').'%'],
-            ['is_approved','like',
-            '%'.$request->get('approved').'%'],
-            // ['address','like',
-            // '%'.$request->get('address').'%']
-            ])->get();
-        
-        
-        return $found;
+                ['name','like',
+                '%'.$request->get('nama').'%'],
+                ['contact','like',
+                '%'.$request->get('telepon').'%'],
+                ['id','like',
+                '%'.$request->get('idStaff').'%'],
+                ['is_approved','like',
+                '%'.$request->get('status').'%'],
+                
+                ])->get();
+            
+        return view('staff_search')->with('result', $found);    
+        //return $found;
     }
 
     //change approval status
-    public function approve($id)
+    public function changeStatus(Request $request)
     {
-        $staff = Staff::findOrFail($id);
-        $staff->is_approved = '1';
+        $staff = Staff::findOrFail($request->get('id'));
+        $staff->is_approved = !$staff->is_approved;
         $staff->save();
         
         return response($staff, 200);
     }
 
-    public function disapprove($id)
-    {
-        $staff = Staff::findOrFail($id);
-        $staff->is_approved = '0';
-        $staff->save();
+    // public function approve($id)
+    // {
+    //     $staff = Staff::findOrFail($id);
+    //     $staff->is_approved = '1';
+    //     $staff->save();
         
-        return response($staff, 200);
-    }
+    //     return response($staff, 200);
+    // }
+
+    // public function disapprove($id)
+    // {
+    //     $staff = Staff::findOrFail($id);
+    //     $staff->is_approved = '0';
+    //     $staff->save();
+        
+    //     return response($staff, 200);
+    // }
 }

@@ -30,6 +30,8 @@
                     </ul>
 
                     <form class="form-signin" method="POST">
+                        {{ csrf_field() }}
+
                         <div class="search_top">
                             <div class="form-group has-feedback has-feedback-left">
                                 <input type="text" name="username"  class="form-control" id="username" placeholder="Cari Bedasarkan Username">
@@ -47,6 +49,8 @@
                 <div class="x_content">
 
                     <form class="form-signin" method="POST">
+
+                        {{ csrf_field() }}
 
                         <div class="search_bottom">
                             <div class="form-group has-feedback">
@@ -171,23 +175,24 @@
                             //                                    $result = mysqli_query($connection, $command);
                             //                                }
                             //
-                            //
+                            // //
                                                            $data="";
                                                            if($result){
                                                                $count_row = 1;
                             
                                                                // Fetch one and one row
                             
-                                                               while ($row= $result->fetch_row()){
+                                                               // while ($row= $result->fetch_row()){ 
+                                                               foreach ($result as $row){
                                                                    $data .= "<tr id='row_".$count_row."'>
-                                                                                   <td  id='pasienID'>" .$row[7]. "</td>
-                                                                                   <td>" .$row[0]. "</td>
-                                                                                   <td>" .$row[1]. "</td>
-                                                                                   <td>" .$row[2]. "</td>
-                                                                                   <td>" .$row[3]. "</td>
-                                                                                   <td>" .$row[4]. "</td>
-                                                                                   <td>" .$row[5]. "</td>
-                                                                                   <td>" .$row[6]. "</td>
+                                                                                   <td  id='pasienID'>" .$row->id. "</td>
+                                                                                   <td>" .$row->NIK. "</td>
+                                                                                   <td>" .$row->name. "</td>
+                                                                                   <td>" .$row->username. "</td>
+                                                                                   <td>" .$row->phone_number. "</td>
+                                                                                   <td>" .$row->address. "</td>
+                                                                                   <td>" .$row->gender. "</td>
+                                                                                   <td>" .$row->blood_type. "</td>
                                                                                    <td><a data-row='row_".$count_row."' class='btn btn-info btn-block pasienProfile'>
                                                                                            <i class='fa fa-archive'></i> Lihat Riwayat
                                                                                        </a>
@@ -201,7 +206,7 @@
                             
                                                                echo $data;
                                                            }
-
+                            
                             ?>
 
                             <script text="text/javascript">
@@ -209,7 +214,8 @@
                                     $('.pasienProfile').click( function(){
                                         var rowID = $(this).attr('data-row');
                                         var pasien_id=$(this).closest('#' + rowID).find('#pasienID').text();
-                                        window.location.href = 'pasienProfile2.php?id=' + pasien_id;
+                                        //window.location.href = 'pasienProfile2.php?id=' + pasien_id;
+                                        window.location.href = '{{ url('/patient')}}' + "/"+pasien_id + "/diagnosis";
                                     });
                                 });
 

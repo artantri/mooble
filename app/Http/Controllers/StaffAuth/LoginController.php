@@ -61,14 +61,17 @@ class LoginController extends Controller
     //bikin method baru buat send response kalo blm diapprove
     protected function sendNotApprovedResponse(Request $request)
     {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
-                $this->username() => "belum di approve",
+                'status' => "anda belum di approve",
             ]);
     }
 
-    /*
+    
 
     //override buat cek approval staff
     public function login(Request $request)
@@ -103,9 +106,9 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    */
+    
 
-    public function login(Request $request)
+    /*public function login(Request $request)
     {
         $this->validateLogin($request);
 
@@ -136,15 +139,15 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-    }
+    }*/
 
-    //override nambah cek approved
-    protected function attemptLogin(Request $request)
-    {
-        return $this->guard()->attempt([
-            $this->credentials($request)/*,'is_approved'=>'1'*/], $request->has('remember')
-        );
-    }
+    // //override nambah cek approved
+    // protected function attemptLogin(Request $request)
+    // {
+    //     return $this->guard()->attempt([
+    //         $this->credentials($request)/*,'is_approved'=>'1'*/], $request->has('remember')
+    //     );
+    // }
 
     /**
      * Validate the user login request.
@@ -192,26 +195,26 @@ class LoginController extends Controller
     }
 
     //tes
-    protected function checkCredentials(Request $request)
-    {
-        // $found= Staff::where([
-        //     ['username','=', $request->get('username')],
-        //     ['password','=', $request->get('password')],
-        //     ])->get();
-        $found = Staff::where([
-            ['username','=',
-            $request->get('username')],
-            ['password','=',
-            $request->get('password')],
-            // ['address','like',
-            // '%'.$request->get('address').'%']
-            ])->get();
+    // protected function checkCredentials(Request $request)
+    // {
+    //     // $found= Staff::where([
+    //     //     ['username','=', $request->get('username')],
+    //     //     ['password','=', $request->get('password')],
+    //     //     ])->get();
+    //     $found = Staff::where([
+    //         ['username','=',
+    //         $request->get('username')],
+    //         ['password','=',
+    //         $request->get('password')],
+    //         // ['address','like',
+    //         // '%'.$request->get('address').'%']
+    //         ])->get();
 
 
-        if($found){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
+    //     if($found){
+    //         return 1;
+    //     }else{
+    //         return 0;
+    //     }
+    // }
 }

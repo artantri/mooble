@@ -29,6 +29,18 @@
                 //show_stack_bar_bottom('passError');
                 //"show_stack_bar_bottom('captchaError');
 
+                @if (session()->has('success'))
+                    show_stack_bar_bottom('success');      
+                @endif
+
+                @if ($errors->has('g-recaptcha-response'))
+                    show_stack_bar_bottom('captchaError');      
+                @elseif ($errors->has('status'))
+                    show_stack_bar_bottom('statusError');      
+                @elseif (count($errors))
+                    show_stack_bar_bottom('validationError');
+                @endif
+
                 function show_stack_bar_bottom(type) {
                     var opts = {
                         title: "Over Here",
@@ -60,6 +72,11 @@
                             opts.text = "Anda sudah terdaftar sebagai Staff pada MOOBLE, Silahkan tunggu sampai dokter menyetujui pendaftaran anda";
                             opts.type = "success";
                             break;
+                        case 'validationError':
+                            opts.title = "Oops";
+                            opts.text = "{{ $errors->first() }}";
+                            opts.type = "error";
+                            break;
                     }
                     new PNotify(opts);
                 }
@@ -86,7 +103,7 @@
                     </label>
                 </div>
             </div>
-            <form method="POST" style="padding-top:10px;">
+            <form method="POST" style="padding-top:10px;" action="{{ url('/staff_login') }}">
 
                 {{ csrf_field() }}
                 

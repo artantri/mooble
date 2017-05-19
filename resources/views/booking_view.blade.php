@@ -9,7 +9,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_content">
-                    <form class="form-horizontal" style="padding-bottom:20px; padding-top:20px;" method="POST" >
+                    <form class="form-horizontal" style="padding-bottom:20px; padding-top:20px;" method="GET" >
                         <fieldset>
                             <div class="control-group">
                                 <div class="controls">
@@ -31,26 +31,28 @@
                                 <select id="filterDokter" name="filterDokter" class="form-control">
                                     <option value="">Semua Dokter</option>
                                     
-                                    <?
-                                    $connection = mysqli_connect('localhost', 'root', '');
-                                    if (!$connection){
-                                        die("Database Connection Failed" . mysqli_error($connection));
-                                    }
-                                    $select_db = mysqli_select_db($connection, 'DB_mooble');
-                                    if (!$select_db){
-                                        die("Database Selection Failed" . mysqli_error($connection));
-                                    }
-                                    $result = mysqli_query($connection,"SELECT doctor_id, name  FROM `doctor`");
+                                    <?php
+                                    // $connection = mysqli_connect('localhost', 'root', '');
+                                    // if (!$connection){
+                                    //     die("Database Connection Failed" . mysqli_error($connection));
+                                    // }
+                                    // $select_db = mysqli_select_db($connection, 'db_mooble');
+                                    // if (!$select_db){
+                                    //     die("Database Selection Failed" . mysqli_error($connection));
+                                    // }
+                                    // $result = mysqli_query($connection,"SELECT doctor_id, name  FROM `doctor`");
 
-                                    if($result){
-                                        while ($filterDokter= $result->fetch_row()){
-                                            echo "<option value=" .$filterDokter[0]. ">Dokter " .$filterDokter[1]. "</option>";
+                                    //$doctor="";
+                                    if($doctor){
+                                        foreach ($doctor as $filterDokter) {
+                                            echo "<option value=" .$filterDokter->id. ">Dokter " .$filterDokter->name. "</option>";
                                         }
                                     }
+                                    
                                     ?>
                                     
                                 </select>
-                            </div>
+                            </div> 
 
                         </fieldset>
                         <br>
@@ -88,112 +90,152 @@
                         <tbody>
                             
                             <?php
-                            $connection = mysqli_connect('localhost', 'root', '');
-                            if (!$connection){
-                                die("Database Connection Failed" . mysqli_error($connection));
-                            }
-                            $select_db = mysqli_select_db($connection, 'DB_mooble');
-                            if (!$select_db){
-                                die("Database Selection Failed" . mysqli_error($connection));
-                            }
+                            // $connection = mysqli_connect('localhost', 'root', '');
+                            // if (!$connection){
+                            //     die("Database Connection Failed" . mysqli_error($connection));
+                            // }
+                            // $select_db = mysqli_select_db($connection, 'DB_mooble');
+                            // if (!$select_db){
+                            //     die("Database Selection Failed" . mysqli_error($connection));
+                            // }
 
-                            if(isset($_POST) & !empty($_POST)){
-                                $date = isset($_POST['filterDate']) ? $_POST['filterDate'] : '';
-                                $session = isset($_POST['filterSession']) ? $_POST['filterSession'] : '';
-                                $dokter = isset($_POST['filterDokter']) ? $_POST['filterDokter'] : '';
-                                $addQuery = "";
-                                if($session != ""){
-                                    $addQuery = " AND booking.request_appoint_session = '$session'";
-                                }
-                                if($dokter != ""){
-                                    $addQuery .= " AND doctor.doctor_id = '$dokter'";
-                                }
-                                list($bulan, $tanggal, $tahun) = explode("/", $date);
-                                $dateString = $tahun. "-" .$bulan. "-" .$tanggal;
-                                $dateHour = $dateString;
-                                $result = mysqli_query($connection,"SELECT
-                                                                                      patient.NIK,
-                                                                                      patient.name,
-                                                                                      patient.address,
-                                                                                      patient.phone_number,
-                                                                                      doctor.name,
-                                                                                      booking.appointment_time,
-                                                                                      booking.request_appoint_session,
-                                                                                      booking.status,
-                                                                                      booking.booking_id
-                                                                                    FROM
-                                                                                      (
-                                                                                        (
-                                                                                          `booking`
-                                                                                        INNER JOIN
-                                                                                          patient ON booking.patient_id = patient.patient_id
-                                                                                        )
-                                                                                      INNER JOIN
-                                                                                        doctor ON booking.doctor_id = doctor.doctor_id
-                                                                                      )
+                            // if(isset($_POST) & !empty($_POST)){
+                            //     $date = isset($_POST['filterDate']) ? $_POST['filterDate'] : '';
+                            //     $session = isset($_POST['filterSession']) ? $_POST['filterSession'] : '';
+                            //     $dokter = isset($_POST['filterDokter']) ? $_POST['filterDokter'] : '';
+                            //     $addQuery = "";
+                            //     if($session != ""){
+                            //         $addQuery = " AND booking.request_appoint_session = '$session'";
+                            //     }
+                            //     if($dokter != ""){
+                            //         $addQuery .= " AND doctor.doctor_id = '$dokter'";
+                            //     }
+                            //     list($bulan, $tanggal, $tahun) = explode("/", $date);
+                            //     $dateString = $tahun. "-" .$bulan. "-" .$tanggal;
+                            //     $dateHour = $dateString;
+                            //     $result = mysqli_query($connection,"SELECT
+                            //                                                           patient.NIK,
+                            //                                                           patient.name,
+                            //                                                           patient.address,
+                            //                                                           patient.phone_number,
+                            //                                                           doctor.name,
+                            //                                                           booking.appointment_time,
+                            //                                                           booking.request_appoint_session,
+                            //                                                           booking.status,
+                            //                                                           booking.booking_id
+                            //                                                         FROM
+                            //                                                           (
+                            //                                                             (
+                            //                                                               `booking`
+                            //                                                             INNER JOIN
+                            //                                                               patient ON booking.patient_id = patient.patient_id
+                            //                                                             )
+                            //                                                           INNER JOIN
+                            //                                                             doctor ON booking.doctor_id = doctor.doctor_id
+                            //                                                           )
 
-                                                                                      WHERE
-                                                                                      booking.request_appoint_date = '$dateHour' AND booking.status != 'decline' AND booking.status != 'process'" .$addQuery. "
-                                                                                    ORDER BY
-                                                                                      booking.booking_timestamp");
+                            //                                                           WHERE
+                            //                                                           booking.request_appoint_date = '$dateHour' AND booking.status != 'decline' AND booking.status != 'process'" .$addQuery. "
+                            //                                                         ORDER BY
+                            //                                                           booking.booking_timestamp");
 
 
-                            }
-                            else{
-                                $dateNow = date('Y-m-d');
-                                $dateHour = $dateNow;
-                                $result = mysqli_query($connection,"SELECT
-                                                                                      patient.NIK,
-                                                                                      patient.name,
-                                                                                      patient.address,
-                                                                                      patient.phone_number,
-                                                                                      doctor.name,
-                                                                                      booking.appointment_time,
-                                                                                      booking.request_appoint_session,
-                                                                                      booking.status,
-                                                                                      booking.booking_id
-                                                                                    FROM
-                                                                                      (
-                                                                                        (
-                                                                                          `booking`
-                                                                                        INNER JOIN
-                                                                                          patient ON booking.patient_id = patient.patient_id
-                                                                                        )
-                                                                                      INNER JOIN
-                                                                                        doctor ON booking.doctor_id = doctor.doctor_id
-                                                                                      )
+                            // }
+                            // else{
+                            //     $dateNow = date('Y-m-d');
+                            //     $dateHour = $dateNow;
+                            //     $result = mysqli_query($connection,"SELECT
+                            //                                                           patient.NIK,
+                            //                                                           patient.name,
+                            //                                                           patient.address,
+                            //                                                           patient.phone_number,
+                            //                                                           doctor.name,
+                            //                                                           booking.appointment_time,
+                            //                                                           booking.request_appoint_session,
+                            //                                                           booking.status,
+                            //                                                           booking.booking_id
+                            //                                                         FROM
+                            //                                                           (
+                            //                                                             (
+                            //                                                               `booking`
+                            //                                                             INNER JOIN
+                            //                                                               patient ON booking.patient_id = patient.patient_id
+                            //                                                             )
+                            //                                                           INNER JOIN
+                            //                                                             doctor ON booking.doctor_id = doctor.doctor_id
+                            //                                                           )
 
-                                                                                      WHERE
-                                                                                      booking.request_appoint_date = '$dateHour' AND booking.status != 'decline' AND booking.status != 'process'
-                                                                                    ORDER BY
-                                                                                      booking.booking_timestamp");
+                            //                                                           WHERE
+                            //                                                           booking.request_appoint_date = '$dateHour' AND booking.status != 'decline' AND booking.status != 'process'
+                            //                                                         ORDER BY
+                            //                                                           booking.booking_timestamp");
 
-                            }
+                            // }
+                            // $data="";
+                            // $resultCount = mysqli_num_rows($result);
+                            // if($resultCount != 0){
+                            //     $count_row = 1;
+
+                            //     // Fetch one and one row
+                            //     while ($row= $result->fetch_row()){
+                            //         $data .= "<tr id='row_".$count_row."'>
+                            //                             <td id='bookingID' style='display: none;'>" .$row[8]. "</td>
+                            //                             <td>" .$row[0]. "</td>
+                            //                             <td>" .$row[1]. "</td>
+                            //                             <td>" .$row[2]. "</td>
+                            //                             <td>" .$row[3]. "</td>
+                            //                             <td>" .$row[4]. "</td>
+                            //                             <td>" .$row[6]. "</td>
+                            //                             <td>" .$row[5]. "</td>
+                            //                             <td>" .$row[7]. "</td>
+                            //                             <td><input type='checkbox' data-row='row_".$count_row."' name='test' ";
+                            //         if($row[7] == 'accept')
+                            //         {
+                            //             $data .= "class='flat statusBooking'> Pasien Sudah Dilayani
+                            //                                 </td>
+                            //                             </tr>"; 
+                            //         }
+                            //         elseif($row[7] == 'finish')
+                            //         {
+                            //             $data .= "class='flat statusBooking' checked='checked'> Pasien Sudah Dilayani
+                            //                                 </td>
+                            //                             </tr>"; 
+                            //         }
+                            //         $count_row ++;
+                            //     }
+
+                            //     echo $data;
+                            // }
+                            // elseif($resultCount == 0){
+                            //     echo "<tr><td colspan='9' align='center' style= 'padding: 30px;'><h3 style= 'color:gray;'>Tidak ada booking pada tanggal ini</h3></td></tr>";
+                            // }
+
                             $data="";
-                            $resultCount = mysqli_num_rows($result);
+                            $resultCount = count($booking);
                             if($resultCount != 0){
                                 $count_row = 1;
 
                                 // Fetch one and one row
-                                while ($row= $result->fetch_row()){
+                                // while ($row= $result->fetch_row()){
+                                foreach ($booking as $row) {
                                     $data .= "<tr id='row_".$count_row."'>
-                                                        <td id='bookingID' style='display: none;'>" .$row[8]. "</td>
-                                                        <td>" .$row[0]. "</td>
-                                                        <td>" .$row[1]. "</td>
-                                                        <td>" .$row[2]. "</td>
-                                                        <td>" .$row[3]. "</td>
-                                                        <td>" .$row[4]. "</td>
-                                                        <td>" .$row[6]. "</td>
-                                                        <td>" .$row[5]. "</td>
-                                                        <td>" .$row[7]. "</td>
+                                                        <td id='bookingID' style='display: none;'>" .$row->id. "</td>
+                                                        <td>" .$row->patient->NIK. "</td>
+                                                        <td>" .$row->patient->name. "</td>
+                                                        <td>" .$row->patient->address. "</td>
+                                                        <td>" .$row->patient->phone_number. "</td>
+                                                        <td>" .$row->doctor->name. "</td>
+                                                        <td>" .$row->request_session. "</td>
+                                                        <td>" .$row->request_date. "</td>
+                                                        <td>" .$row->status. "</td>
                                                         <td><input type='checkbox' data-row='row_".$count_row."' name='test' ";
-                                    if($row[7] == 'accept')
+                                    if($row->status == 'accept')
                                     {
                                         $data .= "class='flat statusBooking'> Pasien Sudah Dilayani
                                                             </td>
                                                         </tr>"; 
                                     }
-                                    elseif($row[7] == 'finish')
+                                    elseif($row->status == 'finish')
                                     {
                                         $data .= "class='flat statusBooking' checked='checked'> Pasien Sudah Dilayani
                                                             </td>
@@ -218,8 +260,8 @@
 
                                         $.ajax({
                                             type: "POST",
-                                            url: "statusBooking.php",
-                                            data: {ID: booking_id, status: "finish"},
+                                            url: "{{ url('/booking/status') }}",
+                                            data: {ID: booking_id, status: "finish", "_token":"{{ csrf_token() }}"},
 
                                         });
 
@@ -234,8 +276,8 @@
 
                                         $.ajax({
                                             type: "POST",
-                                            url: "statusBooking.php",
-                                            data: {ID: booking_id, status: "cancel"},
+                                            url: "{{ url('/booking/status') }}",
+                                            data: {ID: booking_id, status: "accept", "_token":"{{ csrf_token() }}"},
 
                                         });
 

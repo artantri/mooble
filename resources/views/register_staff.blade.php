@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
     <head>
-        <title>Dokter Register</title>
+        <title>Staff Register</title>
 
         <link href="{{ asset('gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -29,6 +29,12 @@
                 var stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
                 //show_stack_bar_bottom('passError');
                 //"show_stack_bar_bottom('captchaError');
+
+                @if($errors->has('g-recaptcha-response'))
+                    show_stack_bar_bottom('captchaError');      
+                @elseif (count($errors))
+                    show_stack_bar_bottom('validationError');
+                @endif
 
                 function show_stack_bar_bottom(type) {
                     var opts = {
@@ -61,6 +67,11 @@
                             opts.text = "Anda sudah terdaftar sebagai dokter pada MOOBLE";
                             opts.type = "success";
                             break;
+                        case 'validationError':
+                            opts.title = "Oops";
+                            opts.text = "{{ $errors->first() }}";
+                            opts.type = "error";
+                            break;
                     }
                     new PNotify(opts);
                 }
@@ -77,7 +88,7 @@
             <div class="image_container">
                 <h3 class="form-signin-heading font-roboto">Daftar sebagai</h3>
                 <div id="person" class="btn-group btn-middle" data-toggle="buttons">
-                    <button class="btn btn-choose btn-passive font-roboto" data-toggle-class="btn-succes" data-toggle-passive-class="btn-default" onclick="window.location='http://localhost/MOOBLE/public/registerDokter'">
+                    <button class="btn btn-choose btn-passive font-roboto" data-toggle-class="btn-succes" data-toggle-passive-class="btn-default" onclick="window.location='{{ url('/register') }}'">
                         Dokter
                     </button>
                     <label class="btn btn-choose btn-active font-roboto" data-toggle-class="btn-success" data-toggle-passive-class="btn-default" >
@@ -85,12 +96,17 @@
                     </label>
                 </div>
             </div>
-            <form method="POST" style="padding-top:10px;">
+            <form method="POST" style="padding-top:10px;" action="{{ url('/staff_register') }}">
+
+                {{ csrf_field() }}
                 <label for="inputUsername" class="sr-only">Username</label>
                 <input type="text" name="username" id="inputUsername" class="form-control font-roboto" placeholder="Username" required> 
 
                 <label for="inputName" class="sr-only">Name</label>
                 <input type="text" name="name" id="inputName" class="form-control font-roboto" placeholder="Nama" required> 
+
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="email"  name="email" id="inputEmail" class="form-control font-roboto" placeholder="Email" required>
 
                 <label for="inputContact" class="sr-only">Contact</label>
                 <input type="text" name="contact" id="inputContact" class="form-control font-roboto" placeholder="Nomor Telepon" required> 
@@ -102,7 +118,7 @@
 
 
                 <button class="btn btn-lg btn-primary btn-block font-roboto" type="submit">DAFTAR</button>
-                <h6><p class ="changeLogReg font-roboto-condensed">Sudah Memiliki Akun? <a href="http://localhost/MOOBLE/public/loginStaff">Masuk Disini</a></p></h6>
+                <h6><p class ="changeLogReg font-roboto-condensed">Sudah Memiliki Akun? <a href="{{ url('/staff_login') }}">Masuk Disini</a></p></h6>
             </form>
         </div>
 

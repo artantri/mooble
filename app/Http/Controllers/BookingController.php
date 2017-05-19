@@ -90,7 +90,7 @@ class BookingController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $booking = new Booking;
+        $booking = Booking::findOrFail($id);
         $booking->patient_id = $patient_id;
         $booking->doctor_id = $request->input('doctor_id');
         $booking->staff_id = $request->input('staff_id');
@@ -115,5 +115,50 @@ class BookingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //untuk staff accept (or decline)
+    public function accept(Request $request)
+    {
+        $booking = Booking::findOrFail($request->input('ID'));
+        $booking->status = $request->input('status');
+
+        if ($request->input('status')=='decline') {
+            $booking->status_decline=$request->input('status_decline');
+        }
+        
+        $booking->save();
+        
+        return response($booking, 200);
+    }
+
+    //change status booking dari checkbox
+    public function changeStatus(Request $request)
+    {
+        $booking = Booking::findOrFail($request->input('ID'));
+        $booking->status = $request->input('status');
+        
+        $booking->save();
+        
+        return response($booking, 200);
+    }
+
+    public function filter(Request $request)
+    {
+        //return view('home');
+        $found = Booking::where([
+                [$booking->doctor->id,'like',
+                '%'.$request->get('filterDokter').'%'],
+                ['contact','like',
+                '%'.$request->get('telepon').'%'],
+                ['id','like',
+                '%'.$request->get('idStaff').'%'],
+                ['is_approved','like',
+                '%'.$request->get('status').'%'],
+                
+                ])->get();
+            
+        return view('staff_search')->with('result', $found);    
+        //return $found;
     }
 }

@@ -28,7 +28,7 @@
                 //show_stack_bar_bottom('passError');
                 //"show_stack_bar_bottom('captchaError');
 
-                @if ($errors->has('g-recaptcha-response'))
+                @if($errors->has('g-recaptcha-response'))
                     show_stack_bar_bottom('captchaError');      
                 @elseif (count($errors))
                     show_stack_bar_bottom('validationError');

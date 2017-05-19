@@ -117,12 +117,13 @@ use App\Traits\CaptchaTrait;
 class RegisterController extends Controller
 {
 
-    protected $redirectPath = 'staff_home';
+    protected $redirectPath = '/staff_login';
 
     //shows registration form to staff
     public function showRegistrationForm()
     {
-        return view('staff.auth.register');
+        // return view('staff.auth.register');
+        return view('register_staff');
     }
 
   //Handles registration request for staff
@@ -136,10 +137,10 @@ class RegisterController extends Controller
         $staff = $this->create($request->all());
 
         //Authenticates staff
-        $this->guard()->login($staff);
+        //$this->guard()->login($staff);
 
        //Redirects staffs
-        return redirect($this->redirectPath);
+        return redirect($this->redirectPath)->with('success', 'success');
     }
 
     //Validates user's Input
@@ -149,7 +150,8 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:staffs',
             'username' => 'required|max:255|unique:staffs',
-            'password' => 'required|min:6|confirmed',
+            //'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
 
             // 'g-recaptcha-response' => 'required',
             // 'captcha'               => 'required|min:1'
@@ -159,7 +161,7 @@ class RegisterController extends Controller
             'email.email' => 'Email tidak valid.',
             'username.unique' => 'Username ini telah digunakan.',
             'password.min' => 'Password harus lebih dari 6 karakter.',
-            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            //'password.confirmed' => 'Konfirmasi password tidak sesuai.',
             // 'g-recaptcha-response.required' => 'Captcha belum diisi',
             // 'captcha.min'           => 'Wrong captcha, please try again.'
 

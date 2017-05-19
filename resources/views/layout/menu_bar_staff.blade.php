@@ -22,6 +22,8 @@
         <link href="{{ asset('gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.css') }}" rel="stylesheet">
         <!-- Custom styling plus plugins -->
         <link href="{{ asset('gentelella-master/build/css/custom.css') }}" rel="stylesheet">
+        <!--CheckBox-->
+        <link href="{{ asset('gentelella-master/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     </head>
 
@@ -50,7 +52,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -131,7 +133,7 @@
 
                 <!-- page content -->
                 <div class="right_col" role="main">
-                        @yield('content')
+                    @yield('content')
                 </div>
                 <!-- /page content -->
 
@@ -157,6 +159,7 @@
         <script src="{{ asset('gentelella-master/vendors/iCheck/icheck.min.js') }}"></script>
         <!-- Custom Theme Scripts -->
         <script src="{{ asset('gentelella-master/build/js/custom.js') }}"></script>
-
+        <!--CheckBox-->
+        <script src="{{ asset('gentelella-master/vendors/iCheck/icheck.min.js') }}"></script>
     </body>
 </html>
